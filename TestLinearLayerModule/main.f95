@@ -1,18 +1,23 @@
+!we need a module for our class
+
 module linear_layer
 	implicit none
 	private
+	!now declare our type meaning our class or struct in C
 	type, public :: linear_layer_object
 		real, dimension(:,:), private, allocatable :: W, B
 		integer, dimension(2), private :: shape_W, shape_B
 		integer :: num_inputs, num_outputs
 	contains
+	!declare our procedures
 		procedure :: constructor => linear_layer_constructor
 		procedure :: print_layer => print_layer_values
 	end type linear_layer_object
 contains
-	subroutine print_layer_values(this)
+	!write our procedures
+	subroutine print_layer_values(this) !this will be the first argument kinda like self in python
 		!implicit none
-		class(linear_layer_object), intent(in) :: this
+		class(linear_layer_object), intent(in) :: this !always delcare all ur variables
 		print *, "linear_layer shape(", this%num_inputs, this%num_outputs, ")"
 	end subroutine print_layer_values
 
