@@ -2,7 +2,7 @@ module LinearLayer
 	implicit none
 	private
 	type, public :: linear_layer_object
-		real, dimension(:,:), private, allocatable :: W, B, output !output is used to compute partial updates
+		real, dimension(:,:), private, allocatable :: W, B, input !input is used to compute partial updates
 		integer :: num_inputs, num_outputs
 	contains
 		procedure :: constructor => linear_layer_constructor
@@ -12,7 +12,7 @@ module LinearLayer
 contains
 	subroutine print_layer_values(this)
 		class(linear_layer_object), intent(in) :: this
-		print *, "linear_layer shape(", this%num_inputs, this%num_outputs, ")"
+		print *, "LinearLayer shape(", this%num_inputs, this%num_outputs, ")"
 		print *, "wheights matrix"
 		print *, this%W
 		print *, "bias matrix"
@@ -27,7 +27,7 @@ contains
 		this%num_outputs = num_outputs_local
 		allocate(this%W(num_inputs_local,num_outputs_local))
 		allocate(this%B(num_outputs_local,1))
-		allocate(this%output(num_outputs_local,1))
+		allocate(this%input(num_outputs_local,1))
 		do i=1, size(this%W,1)
 			do j=1, size(this%W,2)
 				this%W(1,2) = 4
